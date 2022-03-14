@@ -10,6 +10,8 @@ from sklearn.model_selection import train_test_split
 # Cargamos el conjunto de datos
 dataset = pd.read_csv('Walmart.csv')
 
+dataset = pd.DataFrame(dataset)
+
 # Variables independientes: Weekly_Sales, Unemployment, Fuel_Price, CPI
 # Variables dependetientes: Date
 # Variable a predecir Weekly_Sales
@@ -23,8 +25,8 @@ train_x, test_x, train_y, test_y = train_test_split(x,
 
 print(test_y)
 print(train_y)
-# Se define el grado del polinomio
-pol = PolynomialFeatures(degree=4)
+
+pol = PolynomialFeatures(degree=7)
 
 # Se transforma las caracteristicas
 x_train_poli = pol.fit_transform(train_x)
