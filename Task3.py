@@ -43,7 +43,7 @@ plt.show()
 
 
 X_train, X_test, y_train, y_test = train_test_split(
-    dataset[dataset.columns[:]].values, dataset[dataset.columns[0]].values, test_size=0.7, random_state=123)
+    dataset[dataset.columns[:]].values, dataset[dataset.columns[0]].values, test_size=0.7, train_size=0.2, random_state=123)
 
 # train the model on train set
 model = svm.SVC(kernel='rbf', C=1)
@@ -57,7 +57,7 @@ print(classification_report(y_test, predictions))
 # defining parameter range
 param_grid = {'C': [0.1, 1, 10, 100, 1000],
               'gamma': [1, 0.1, 0.01, 0.001, 0.0001],
-              'kernel': ['rbf']}
+              'kernel': ['rbf', 'poly', 'sigmoid']}
 
 # Refit an estimator using the best found parameters on the whole dataset.
 grid = GridSearchCV(svm.SVC(), param_grid, refit=True, cv=3, verbose=3)

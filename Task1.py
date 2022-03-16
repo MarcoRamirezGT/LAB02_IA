@@ -15,9 +15,14 @@ dataset = pd.DataFrame(dataset)
 # Variables independientes: Weekly_Sales, Unemployment, Fuel_Price, CPI
 # Variables dependetientes: Date
 # Variable a predecir Weekly_Sales
-y = dataset.iloc[:, 2].values
-x = dataset.iloc[:, 0:1].values
 
+
+dataset['Date'] = pd.to_datetime(dataset['Date'], dayfirst=True,)
+dataset['Week'] = dataset['Date'].dt.week
+y = dataset.iloc[:, 2].values
+x = dataset.iloc[:, 7:8].values
+
+print(dataset)
 
 train_x, test_x, train_y, test_y = train_test_split(x,
                                                     y,
@@ -26,7 +31,7 @@ train_x, test_x, train_y, test_y = train_test_split(x,
 print(test_y)
 print(train_y)
 
-pol = PolynomialFeatures(degree=7)
+pol = PolynomialFeatures(degree=20)
 
 # Se transforma las caracteristicas
 x_train_poli = pol.fit_transform(train_x)
